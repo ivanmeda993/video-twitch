@@ -12,7 +12,7 @@ import { useSidebar } from "@/store/useSidebar";
 interface IUserItem {
   username: string;
   imageUrl: string;
-  isLive: boolean;
+  isLive?: boolean;
 }
 export const UserItem = ({ username, imageUrl, isLive }: IUserItem) => {
   const pathname = usePathname();
@@ -24,13 +24,13 @@ export const UserItem = ({ username, imageUrl, isLive }: IUserItem) => {
 
   return (
     <Button
-      className={cn(
-        "w-full h-12",
-        collapsed ? "justify-center" : "justify-start",
-        isActive && "bg-accent",
-      )}
       asChild
       variant="ghost"
+      className={cn(
+        "w-full h-12",
+        collapsed ? "justify-center" : "justfy-start",
+        isActive && "bg-accent",
+      )}
     >
       <Link href={href}>
         <div
@@ -39,7 +39,7 @@ export const UserItem = ({ username, imageUrl, isLive }: IUserItem) => {
             collapsed && "justify-center",
           )}
         >
-          <UserAvatar imageUrl={imageUrl} isLive={isLive} username={username} />
+          <UserAvatar imageUrl={imageUrl} username={username} isLive={isLive} />
           {!collapsed && <p className="truncate">{username}</p>}
           {!collapsed && isLive && <LiveBadge className="ml-auto" />}
         </div>
