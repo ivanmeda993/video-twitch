@@ -14,15 +14,28 @@ export const getRecommended = async () => {
   let users = [];
 
   if (userId) {
+    console.log("userId", userId);
     users = await db.user.findMany({
       where: {
-        NOT: {
-          id: userId,
+        NOT: [
+          {
+            id: userId,
+          },
+          {
+            followedBy: {
+              some: {
+                followerId: userId,
+              },
+            },
+          },
+        ],
+      },
+
+      orderBy: [
+        {
+          createdAt: "desc",
         },
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
+      ],
     });
   } else {
     users = await db.user.findMany({
