@@ -14,6 +14,8 @@ interface IFollowing {
 export const Following = ({ data }: IFollowing) => {
   const collapsed = useSidebar((state) => state.collapsed);
 
+  console.log("FOllowing data", data);
+
   if (!data.length) return null;
 
   return (
